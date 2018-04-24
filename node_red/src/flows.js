@@ -27,7 +27,14 @@ flows.getFlows = function () {
             });
 
             response.on('end', function () {
-                resolve([receivedData]);
+                console.log(receivedData);
+                var dataf = JSON.parse(receivedData);
+                var flows = [];
+
+                if (dataf.length > 0)
+                    flows = dataf[0].flows;
+
+                resolve(flows);
             });
         });
     });
@@ -62,7 +69,7 @@ flows.saveFlows = function (flows) {
         });
 
         // write data to request body
-        req.write(JSON.stringify(flows));
+        req.write(JSON.stringify({ flows: flows, version: new Date() }));
         req.end();
     });
 }

@@ -14,7 +14,10 @@ router.get('/hello', (req, res) => {
 
 // get flows from database.
 router.get('/getFlows', (req, res) => {
-    res.send({ data: " Get" });
+    modelo.find({},{}, {sort: {'version': -1}},function(error,flows){
+        console.log('Traigo los Flows')
+        res.send(flows)        
+    })
     console.log('Ingresa a GetFlows');
 });
 
