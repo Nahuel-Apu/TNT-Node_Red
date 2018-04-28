@@ -2,10 +2,10 @@
 const mongoose = require('mongoose');
 
 //Conexion a imagen de Docker
-//var conector = mongoose.connect('mongodb://mongo/nombres');
+var conector = mongoose.connect('mongodb://mongodb/flows');
 
 //Conexion a localhost
-var conector = mongoose.connect('mongodb://localhost/flows');
+//var conector = mongoose.connect('mongodb://localhost/flows');
 
 mongoose.connection.on('connected',()=>{
     console.log('Se conecto a la BD')

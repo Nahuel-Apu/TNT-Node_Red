@@ -4,7 +4,7 @@ const localFileSystem = require('./node_modules/node-red/red/runtime/storage/loc
 var flows = localFileSystem;
 
 const api = {
-    HOST: "127.0.0.1",
+    HOST: "storage",
     PORT: 8080
 };
 

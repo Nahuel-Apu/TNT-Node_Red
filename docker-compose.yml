@@ -1,13 +1,40 @@
 version: "2"
 services:
-  web:
-    build: .
-    ports:
-      - "8080:8080"
-    links:
-      - mongo
-  
-  mongo:
-    image: mongo
-    ports:
-      - "27017:27017"
+    nginx:
+        build: ./nginx
+        volumes:
+        - ./nginx/nginx/:/etc/nginx
+        ports:
+        - "8080:80"
+        depends_on:
+        - nodered
+        - mqtt
+
+    nodered:
+        build: ./node_red
+        ports:
+        - "1880:1880"
+        volumes:
+        - ./node_red/src:/src
+        depends_on:
+        - storage
+
+    storage:
+        build: ./storage-api
+        ports:
+        - "8100:8100"
+        depends_on:
+        - mongodb
+
+    mongodb:
+        image: mongo
+        ports:
+        - "27017:27017"
+    
+    mqtt:
+        build: ./mosquitto
+        volumes:
+        - ./mosquitto/:/mosquitto/config
+        ports:
+        - "9001:9001"
+        - "1883:1883"
