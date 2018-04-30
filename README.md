@@ -6,10 +6,6 @@
 
 La resolución del TP2 consta de crear un proyecto Docker el cual utilice Ngnix como Proxi Reverso. Node-Red como herramienta para definir flujos, los cuales son guardados en una BD Mongo generada previamente en el TP1. Para este tp el flujo que se generará es de MQTT para translado de mensajes websockects. 
 
-## Alcance
-
-El proyecto incluye la generación artificial de datos. En particular, aquellos referidos a recorridos realizados por ciclistas en la ciudad serán generados en forma sintética. Asimismo, el incluye diseño de las estrategias de elección y ponderación de los recorridos más convenientes para la instalación de ciclovías. Por otro lado, contempla la visualización de los recorridos más convenientes en un mapa y con una escala de ponderación clara.
-
 ## Despliegue del Proyecto
 
 Se ejecuta la sentencia para ejecutar las Imagenes requeridas.
