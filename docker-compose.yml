@@ -12,10 +12,12 @@ services:
 
     nodered:
         build: ./node_red
+        #image: c2b60d7672e2
         ports:
-        - "1880:1880"
+        - "8088:8088"
         volumes:
         - ./node_red/src:/src
+        - ./node_red/src/node-red-contrib-svg-storage:/data/node_modules/node-red-contrib-svg-storage
         depends_on:
         - storage
 

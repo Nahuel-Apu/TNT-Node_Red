@@ -8,7 +8,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "./node_modules/node-red/bin/node-red-pi -u ."
+    "start": "node server"
   },
   "author": "Nahuel",
   "license": "ISC"

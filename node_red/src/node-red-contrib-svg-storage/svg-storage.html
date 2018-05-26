@@ -1,0 +1,57 @@
+<script type="text/javascript">
+    RED.nodes.registerType('svg-storage',{
+        category: 'function',
+        color: '#0080ff',
+        defaults: {
+            name: {value:""},
+            filename: { value: "" },
+            content: {
+                value: "", validate: function (value) { return true; }
+            }
+        },
+        inputs:1,
+        outputs:1,
+        icon: "svg-icon.png",
+        label: function() {
+            return this.name||"svg-storage";
+        },
+        oneditprepare: function () {
+            $("#node-input-svg").on("change", function (event) {
+                var file = event.target.files[0];
+                var reader = new FileReader();
+                reader.onload = (function (file) {
+                    return function (progress) {
+                        var content = progress.currentTarget.result;
+                        var filename = file.name;
+                        $("#node-input-filename").val(filename);
+                        $("#node-input-content").val(content);
+                    };
+                })(file);
+                // read in the image file as a data.
+                reader.readAsText(file);
+            });
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="svg-storage">
+    
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Nombre:</label>
+        <input type="text" title="" id="node-input-name" placeholder="Nombre del nodo">
+    </div>
+    <div class="form-row">
+        <label for="node-input-filename"><i class="icon-tag"></i> Nombre de archivo:</label>
+        <input type="text" title="" id="node-input-filename" placeholder="Nombre de archivos">
+    </div>
+    <div class="form-row">
+        <label for="node-input-svg"><i class="icon-tag"></i> Archivo:</label>
+        <input type="file" title="" id="node-input-svg" accept="image/svg+xml" placeholder="Archivo SVG">
+    </div>
+    <input type="hidden" title="" id="node-input-content">
+
+</script>
+
+<script type="text/x-red" data-help-name="svg-storage">
+    <p>Nodo personalizado svg-storage</p>
+</script>
