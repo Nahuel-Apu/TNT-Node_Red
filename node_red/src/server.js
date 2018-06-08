@@ -1,12 +1,23 @@
 var http = require('http');
+var path = require('path');
 var express = require("express");
 var RED = require("node-red");
 
 // Create an Express app
 var app = express();
+var router = express.Router();
 
 // Add a simple route for static content served from 'public'
-app.use("/",express.static("public"));
+//app.use("/",express.static("public"));
+
+app.use('/nodered', express.static(path.join(__dirname, 'public')));
+
+// serve static files
+router.get('/nodered/server', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/mqtt.html'));
+});
+
+app.use(router);
 
 // Create a server
 var server = http.createServer(app);
