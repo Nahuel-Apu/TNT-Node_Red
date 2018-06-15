@@ -1,27 +1,18 @@
 const clientId = parseInt(Math.random() * 100, 10);
 console.log('Creando ID de cliente:', clientId);
 
-//console.log(location.host);
-//console.log(location.hostname);
+var client = new Paho.MQTT.Client(window.location.hostname, Number(9001), "/mqtt", clientId.toString());
+//var client = new Paho.MQTT.Client(window.location.hostname, Number(8088),clientId.toString());
 
-var client = new Paho.MQTT.Client(window.location.hostname, 8088, "/mqtt", clientId.toString());
-
-// se ejecuta cuando llega un mensaje.
-client.onMessageArrived = (message) => {
-    console.log('[MQTT] - Nuevo mensaje:', message);
-
-    d3.select("circle").style("fill", "red");
-    d3.select("circle").style("stroke", "blue");
-    d3.select("circle").attr("cx", 150)
-    d3.select("circle").attr("cy", 150)
-    d3.select("circle").attr("r", 80);
-}
+// set callback handlers
+client.onConnectionLost = onConnectionLost;
+//client.onMessageArrived = onMessageArrived;
 
 client.connect({
     onSuccess: () => {
         console.log('[MQTT] - Me conecte');
         //client.publish('/a', 'Hola soy el cliente TNT', 0, false);
-        client.subscribe('/test/#', {
+        client.subscribe('/PM/Brewery/#', {
             onSuccess: () => {
                 console.log('[MQTT] - Me subscribi correctamente');
             },
@@ -35,6 +26,23 @@ client.connect({
     }
 });
 
+
+// se ejecuta cuando llega un mensaje.
+ client.onMessageArrived = (message) => {
+    console.log('[MQTT] - Nuevo mensaje:', message);
+    
+
+    d3.select("svg").selectAll('[topico="/PM/Brewery/a"]').style("fill", "yellow");
+    //d3.select("circle").style("fill", "red");
+    //d3.select("circle").style("stroke", "blue");
+}
+
+// called when the client loses its connection
+function onConnectionLost(responseObject) {
+    if (responseObject.errorCode !== 0) {
+      console.log("onConnectionLost:"+responseObject.errorMessage);
+    }
+}
 
 var sampleSVG = d3.select("#canvas")
     .append("svg")
@@ -54,24 +62,24 @@ sampleSVG.append("circle")
     .attr("cx", 30)
     .style("fill", "black");
 
-sampleSVG.append("line")
-   .attr("x1", 50)
-   .attr("y1", 100)
-   .attr("x2", 150) 
-   .attr("y2", 200)
-   .style("stroke", "rgb(255,0,0)")
-   .style("stroke-width", 2);
+sampleSVG.append("rect")
+    .attr("x", 150)
+    .attr("y", 2)
+    .attr("width", 150)
+    .attr("height", 100)
+    .attr("fill", "green");
 
 sampleSVG.append("rect")
-.attr("x", 150)
+.attr("x", 400)
 .attr("y", 2)
 .attr("width", 150)
 .attr("height", 100)
-.attr("fill", "green");
+.attr("fill", "blue")
+.attr("topico", "/PM/Brewery/a");
 
-sampleSVG.append("ellipse")
-.attr("cx", 400)
-.attr("cy", 150)
-.attr("rx", 100)
-.attr("ry", 50)
-.attr("fill", "blue");
+sampleSVG.append("rect")
+.attr("x", 200)
+.attr("y", 150)
+.attr("width", 150)
+.attr("height", 100)
+.attr("fill", "orange");
