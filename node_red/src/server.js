@@ -17,6 +17,21 @@ router.get('/nodered/server', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/mqtt.html'));
 });
 
+// Post autenticacion de Mosquitto
+router.post('/auth', (req, res) => {
+    res.status(200).send("OK");
+});
+
+// Post autenticacion superuser de Mosquitto 
+router.post('/superuser', (req, res) => {
+    res.status(200).send("OK");
+});
+
+// // Post autenticacion ACL de Mosquitto
+router.post('/acl', (req, res) => {
+    res.status(200).send("OK");
+});
+
 app.use(router);
 
 // Create a server

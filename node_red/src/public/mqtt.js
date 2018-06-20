@@ -1,7 +1,7 @@
 const clientId = parseInt(Math.random() * 100, 10);
 console.log('Creando ID de cliente:', clientId);
 
-var client = new Paho.MQTT.Client(window.location.hostname, Number(9001), "/mqtt", clientId.toString());
+var client = new Paho.MQTT.Client(window.location.hostname, Number(9883), "/mqtt", clientId.toString());
 //var client = new Paho.MQTT.Client(window.location.hostname, Number(8088),clientId.toString());
 
 // set callback handlers
@@ -31,7 +31,7 @@ client.connect({
  client.onMessageArrived = (message) => {
     console.log('[MQTT] - Nuevo mensaje:', message);
     
-
+    console.log(message.topic);
     d3.select("svg").selectAll('[topico="/PM/Brewery/a"]').style("fill", "yellow");
     //d3.select("circle").style("fill", "red");
     //d3.select("circle").style("stroke", "blue");
@@ -44,12 +44,15 @@ function onConnectionLost(responseObject) {
     }
 }
 
-var sampleSVG = d3.select("#canvas")
-    .append("svg")
-    .attr("width", 500)
-    .attr("height", 500);
+var sampleSVG = d3.select("#canvas");
+//var sampleSVG = d3.select("#svg");
 
-sampleSVG.append("circle")
+/* var sampleSVG = d3.select("#canvas")
+    .append("svg")
+    .attr("width", 250)
+    .attr("height", 250); */
+
+/* sampleSVG.append("circle")
     .style("stroke", "green")
     .style("fill", "white")
     .attr("r", 40)
@@ -82,4 +85,4 @@ sampleSVG.append("rect")
 .attr("y", 150)
 .attr("width", 150)
 .attr("height", 100)
-.attr("fill", "orange");
+.attr("fill", "orange"); */

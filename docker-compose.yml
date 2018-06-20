@@ -32,11 +32,14 @@ services:
         image: mongo
         ports:
         - "27017:27017"
-    
+
     mqtt:
-        build: ./mosquitto
+        #build: ./mosquitto
+        image: jllopis/mosquitto
         volumes:
-        - ./mosquitto/:/mosquitto/config
+        - ./mosquitto/mosquitto.d/:/etc/mosquitto.d/
+        #- ./mosquitto/:/mosquitto/config
         ports:
-        - "9001:9001"
+        #- "9001:9001"
         - "1883:1883"
+        - "9883:9883"
