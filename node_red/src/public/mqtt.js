@@ -29,12 +29,26 @@ client.connect({
 
 // se ejecuta cuando llega un mensaje.
  client.onMessageArrived = (message) => {
-    console.log('[MQTT] - Nuevo mensaje:', message);
     
-    console.log(message.topic);
-    d3.select("svg").selectAll('[topico="/PM/Brewery/a"]').style("fill", "yellow");
-    //d3.select("circle").style("fill", "red");
-    //d3.select("circle").style("stroke", "blue");
+    console.log('[MQTT] - Nuevo mensaje:', message);
+    let selection = d3.select("svg").selectAll('[topico="' + message.topic + '"]');
+    console.log(selection);
+       
+    //Comprobación por si es Maceracion
+    if(message.topic == "/PM/Brewery/Maceracion"){
+        console.log("Maceracion");
+        console.log(message.payloadString);
+        var x = message.payloadString;
+        setMaceracion(selection,x);        
+    }
+
+    //Comprobacion por Fermentacion o Maduracion
+    if(message.topic == "/PM/Brewery/fermentacion1" ||  "/PM/Brewery/fermentacion2" || "/PM/Brewery/maduracion"){
+        var x = message.payloadString;
+        setGrupo(selection,x);
+    }
+    
+    selection.style("fill", message.payloadString);
 }
 
 // called when the client loses its connection
@@ -45,44 +59,29 @@ function onConnectionLost(responseObject) {
 }
 
 var sampleSVG = d3.select("#canvas");
-//var sampleSVG = d3.select("#svg");
 
-/* var sampleSVG = d3.select("#canvas")
-    .append("svg")
-    .attr("width", 250)
-    .attr("height", 250); */
+//En base al valor que recibo del mensaje seteo un color u otro del tanque de Maceracion.
+//Los mismos hacen referencia a la temperatura necesaria.
+function setMaceracion(selection,x){
+    switch (x) {
+        case '10':
+            selection.style("fill", "yellow");
+            break;
+        case '30':
+            selection.style("fill", "orange");
+            break;
+        case '70':
+            selection.style("fill", "red");
+            break;
+        default:
+            text = "No value found";
+    }
+}
 
-/* sampleSVG.append("circle")
-    .style("stroke", "green")
-    .style("fill", "white")
-    .attr("r", 40)
-    .attr("cx", 50)
-    .attr("cy", 50)
-    .transition()
-    .delay(100)
-    .duration(1000)
-    .attr("r", 10)
-    .attr("cx", 30)
-    .style("fill", "black");
-
-sampleSVG.append("rect")
-    .attr("x", 150)
-    .attr("y", 2)
-    .attr("width", 150)
-    .attr("height", 100)
-    .attr("fill", "green");
-
-sampleSVG.append("rect")
-.attr("x", 400)
-.attr("y", 2)
-.attr("width", 150)
-.attr("height", 100)
-.attr("fill", "blue")
-.attr("topico", "/PM/Brewery/a");
-
-sampleSVG.append("rect")
-.attr("x", 200)
-.attr("y", 150)
-.attr("width", 150)
-.attr("height", 100)
-.attr("fill", "orange"); */
+//Seleccion en base al grupo de Fermentacion y Maduracion
+function setGrupo(selection,x){
+    if (x == "true")
+        selection.style("fill", "yellow");
+    else
+        selection.style("fill", "black");
+}
