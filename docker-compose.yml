@@ -28,6 +28,13 @@ services:
         depends_on:
         - mongodb
 
+    crud:
+        build: ./crud
+        ports:
+        - "8090:8090"
+        depends_on:
+        - mongodb
+
     mongodb:
         image: mongo
         ports:

@@ -1,0 +1,17 @@
+{
+    "name": "node-red",
+    "version": "1.0.0",
+    "description": "Node-RED + MQTT",
+    "main": "server.js",
+    "scripts": {
+        "start": "npm install && node ./src/server.js",
+        "debug": "./node_modules/node-red/bin/node-red-pi -u . --inspect"
+    },
+    "author": "Nahuel Alamo",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.18.2",
+        "express": "^4.16.3",
+        "node-red": "^0.18.4"
+    }
+}

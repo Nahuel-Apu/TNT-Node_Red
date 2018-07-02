@@ -63,14 +63,18 @@ var sampleSVG = d3.select("#canvas");
 //En base al valor que recibo del mensaje seteo un color u otro del tanque de Maceracion.
 //Los mismos hacen referencia a la temperatura necesaria.
 function setMaceracion(selection,x){
+    console.log("Entro");
     switch (x) {
         case '10':
+            console.log("Entro a 10");
             selection.style("fill", "yellow");
             break;
         case '30':
+            console.log("Entro a 30");
             selection.style("fill", "orange");
             break;
         case '70':
+            console.log("Entro a 70");
             selection.style("fill", "red");
             break;
         default:
