@@ -16,27 +16,27 @@ $(function () {
             loadData: function (filter) {
                 return $.ajax({
                     type: "GET",
-                    url: "/api/users"
+                    url: "./api/users"
                 });
             },
             insertItem: function (item) {
                 return $.ajax({
                     type: "POST",
-                    url: "/api/users",
+                    url: "./api/users",
                     data: item
                 });
             },
             updateItem: function (item) {
                 return $.ajax({
                     type: "PUT",
-                    url: "/api/users",
+                    url: "./api/users",
                     data: item
                 });
             },
             deleteItem: function (item) {
                 return $.ajax({
                     type: "DELETE",
-                    url: "/api/users",
+                    url: "./api/users",
                     data: item
                 });
             }

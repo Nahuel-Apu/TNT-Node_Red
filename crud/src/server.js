@@ -16,11 +16,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // get views.
 const views = require('./routes/crud');
-app.use('/public', views);
+app.use(process.env.PREFIX, views);
 
 // define all users api routes.
 const users = require('./routes/crud-user');
-app.use('/api', users);
+//app.use('/api', users);
+app.use(process.env.PREFIX + '/api', users);
 
 // set host and port.
 app.set('host', "http://localhost");

@@ -1,14 +1,21 @@
 version: "2"
 services:
-    nginx:
-        build: ./nginx
+    #nginx:
+    #    build: ./nginx
+    #    volumes:
+    #    - ./nginx/nginx/:/etc/nginx
+    #    ports:
+    #    - "8080:80"
+    #    depends_on:
+    #    - nodered
+    #    - mqtt
+
+    redbird:
+        build: ./redbird
         volumes:
-        - ./nginx/nginx/:/etc/nginx
+        - ./redbird/src:/src
         ports:
-        - "8080:80"
-        depends_on:
-        - nodered
-        - mqtt
+        - "80:80"
 
     nodered:
         build: ./node_red
@@ -32,6 +39,8 @@ services:
         build: ./crud
         ports:
         - "8090:8090"
+        volumes:
+        - ./crud/src:/src
         depends_on:
         - mongodb
 

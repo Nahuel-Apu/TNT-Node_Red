@@ -5,5 +5,4 @@ LABEL author=<apu.n.alamo@gmail.com>
 COPY package.json .
 RUN npm install
 ADD ./src src
-ENV PREFIX "/public"
 CMD npm start
