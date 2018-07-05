@@ -1,18 +1,29 @@
 //Programa que realiza la conexion con la imagen de la BD Mongo.
 const mongoose = require('mongoose');
 
-//Conexion a imagen de Docker
-var conector = mongoose.connect('mongodb://mongodb/tnt');
+// wait a certain time.
+async function wait() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve()
+        }, 2000)
+    });
+}
 
-//Conexion a localhost
-//var conector = mongoose.connect('mongodb://localhost/flows');
+// start the connection to mongodb.
+async function connect() {
+    await wait();
+    var connection = mongoose.connect('mongodb://mongodb/tnt');
 
-mongoose.connection.on('connected',()=>{
-    console.log('Se conecto a la BD')
-})
+    mongoose.connection.on('connected', () => {
+        console.log('[Mongoose] - conectado en:', 'mongodb://mongodb/tnt');
+        return connection;
+    });
 
-mongoose.connection.on('error',(error)=>{
-    console.log('Error a la conexion a la BD', error)
-})
+    mongoose.connection.on('error', (err) => {
+        console.log('[Mongoose] - error de conexion:', err);
+        process.exit(1);
+    });
+}
 
-module.exports = conector; 
+module.exports = connect(); 

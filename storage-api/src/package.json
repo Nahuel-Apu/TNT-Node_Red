@@ -1,11 +1,11 @@
 {
   "name": "storage-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Persistencia y Recuperacion de Flows Node-RED",
   "main": "server.sj",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "npm install && node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"    
   },
   "author": "Nahuel",
   "license": "ISC",

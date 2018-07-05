@@ -14,7 +14,7 @@ flows.getFlows = function () {
         http.get({
             host: api.HOST,
             port: api.PORT,
-            path: '/getFlows'
+            path: '/getFlows/nodered'
         }, function (response) {
             var receivedData = "";
 
@@ -45,7 +45,7 @@ flows.saveFlows = function (flows) {
         const options = {
             host: api.HOST,
             port: api.PORT,
-            path: '/saveFlows',
+            path: '/saveFlows/nodered',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
         };

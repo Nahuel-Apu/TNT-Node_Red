@@ -11,40 +11,40 @@ $(function () {
         autoload: true,
         pageSize: 10,
         pageButtonCount: 5,
-        deleteConfirm: "¿Esta seguro de Borrar el Usuario?",
+        deleteConfirm: "¿Estas seguro de Borrar el Proyecto?",
         controller: {
             loadData: function (filter) {
                 return $.ajax({
                     type: "GET",
-                    url: "./api/users"
+                    url: "./api/projects"
                 });
             },
             insertItem: function (item) {
                 return $.ajax({
                     type: "POST",
-                    url: "./api/users",
+                    url: "./api/projects",
                     data: item
                 });
             },
             updateItem: function (item) {
                 return $.ajax({
                     type: "PUT",
-                    url: "./api/users",
+                    url: "./api/projects",
                     data: item
                 });
             },
             deleteItem: function (item) {
                 return $.ajax({
                     type: "DELETE",
-                    url: "./api/users",
+                    url: "./api/projects",
                     data: item
                 });
             }
         },
         fields: [
-            { name: "username", type: "text", title: "Nombre de Usuario", width: 80, filtering: false },
-            { name: "password", type: "text", title: "Contraseña", width: 80, filtering: false },
-            { name: "superuser", type: "checkbox", title: "Superusuario", width: 30,filtering: false, sorting: false },
+            { name: "project_name", type: "text", title: "Nombre de Proyecto", width: 80, filtering: false },
+            { name: "prefix", type: "text", title: "Prefijo", width: 80, filtering: false },
+            { name: "collectionName", type: "text", title: "Coleccións", width: 30,filtering: false, sorting: false },
             { type: "control", width: 30 }
         ]
     });
