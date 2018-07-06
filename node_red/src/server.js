@@ -39,8 +39,10 @@ var server = http.createServer(app);
 
 // Create the settings object - see default settings.js file for other options
 var settings = {
-    httpAdminRoot:"/nodered",
-    httpRoot: '/nodered',
+    //httpAdminRoot:"/nodered",
+    //httpRoot: '/nodered',
+    httpAdminRoot:process.env.prefix,
+    httpRoot: process.env.prefix,
     httpNodeRoot: "/api",
     userDir:"/data",
     storageModule: require("./flows"),
