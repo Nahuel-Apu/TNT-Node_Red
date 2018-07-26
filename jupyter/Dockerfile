@@ -7,3 +7,7 @@ ENV ACCEPT_INTEL_PYTHON_EULA=yes
 
 CMD jupyter notebook
 
+RUN pip install ipywidgets
+
+RUN jupyter nbextension enable --py widgetsnbextension
+
