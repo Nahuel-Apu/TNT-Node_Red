@@ -11,3 +11,5 @@ RUN pip install ipywidgets
 
 RUN jupyter nbextension enable --py widgetsnbextension
 
+RUN pip install paho-mqtt
+
