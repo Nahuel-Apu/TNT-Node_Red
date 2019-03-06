@@ -13,57 +13,57 @@ services:
     redbird:
         build: ./redbird
         volumes:
-        - ./redbird/src:/src
+            - ./redbird/src:/src
         ports:
-        - "80:80"
+            - "80:80"
 
     nodered:
         build: ./node_red
         #image: c2b60d7672e2
         ports:
-        - "8088:8088"
+            - "8088:8088"
         volumes:
-        - ./node_red/src:/src
-        - ./node_red/src/node-red-contrib-svg-storage:/data/node_modules/node-red-contrib-svg-storage
+            - ./node_red/src:/src
+            - ./node_red/src/node-red-contrib-svg-storage:/data/node_modules/node-red-contrib-svg-storage
         depends_on:
-        - storage
+            - storage
 
     storage:
         build: ./storage-api
         ports:
-        - "8100:8100"
+            - "8100:8100"
         depends_on:
-        - mongodb
+            - mongodb
 
     crud:
         build: ./crud
         ports:
-        - "8090:8090"
+            - "8090:8090"
         volumes:
-        - ./crud/src:/src
+            - ./crud/src:/src
         depends_on:
-        - mongodb
+            - mongodb
 
     mongodb:
         image: mongo
         ports:
-        - "27017:27017"
+            - "27017:27017"
 
     mqtt:
         #build: ./mosquitto
         image: jllopis/mosquitto
         volumes:
-        - ./mosquitto/mosquitto.d/:/etc/mosquitto.d/
+            - ./mosquitto/mosquitto.d/:/etc/mosquitto.d/
         #- ./mosquitto/:/mosquitto/config
         ports:
         #- "9001:9001"
-        - "1883:1883"
-        - "9883:9883"
+            - "1883:1883"
+            - "9883:9883"
     
     jupyter:
         #build: ./jupyter
         image: jupyter/base-notebook
         volumes:
-        - ./jupyter/notebooks:/home/jovyan/work/notebooks/
+            - ./jupyter/notebooks:/home/jovyan/work/notebooks/
         ports:
-        - "8888:8888"
+            - "8888:8888"
