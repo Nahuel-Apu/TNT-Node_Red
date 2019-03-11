@@ -20,9 +20,21 @@ var usersResolver = function(host, url, req) {
   }
 };
 
+// for every URL path that starts with /api/, send request to upstream API service
+var svgResolver = function(host, url, req) {
+  /*
+  El método test() ejecuta la búsqueda de una ocurrencia entre una expresión regular
+  y una cadena especificada. Devuelve true o false.
+  */
+  if(/^\/public/.test(url)){
+     return 'http://localhost:8190/public/svg';
+  }
+};
+
 var proxy = new require('redbird')({
   port: 80,
 });
 
 proxy.addResolver(noderedResolver);
 proxy.addResolver(usersResolver);
+proxy.addResolver(svgResolver);

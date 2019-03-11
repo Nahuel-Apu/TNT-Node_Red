@@ -43,8 +43,6 @@ var settings = {
     //httpRoot: '/nodered',
     httpAdminRoot:process.env.prefix,
     httpRoot: process.env.prefix,
-    httpNodeRoot: "/api",
-    userDir:"/data",
     storageModule: require("./flows"),
     functionGlobalContext: { }    // enables global context
 };

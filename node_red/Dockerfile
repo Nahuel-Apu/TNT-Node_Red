@@ -1,4 +1,5 @@
 FROM node:latest
+#FROM nodered/node-red-docker:latest
 LABEL author=<apu.n.alamo@gmail.com>
 
 #RUN apk --update add bash

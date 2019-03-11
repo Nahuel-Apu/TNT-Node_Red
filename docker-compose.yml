@@ -49,16 +49,21 @@ services:
         ports:
             - "27017:27017"
 
-    mqtt:
-        #build: ./mosquitto
-        image: jllopis/mosquitto
-        volumes:
-            - ./mosquitto/mosquitto.d/:/etc/mosquitto.d/
-        #- ./mosquitto/:/mosquitto/config
+    svg:
+        build: ./dibujo-svg
         ports:
-        #- "9001:9001"
+            - "8190:8190"
+
+    mqtt:
+        build: ./mosquitto
+        #image: jllopis/mosquitto
+        volumes:
+        #   - ./mosquitto/mosquitto.d/:/etc/mosquitto.d/
+            - ./mosquitto/:/mosquitto/config
+        ports:
+            - "9001:9001"
             - "1883:1883"
-            - "9883:9883"
+            #- "9883:9883"
     
     jupyter:
         #build: ./jupyter
